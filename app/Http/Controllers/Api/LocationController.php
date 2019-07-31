@@ -25,8 +25,12 @@ class LocationController extends Controller
         Location::create(['name' => $request->input('name')]);
     }
 
-    public function destroy(Location $location)
+    public function destroy(Request $request)
     {
+        $location = Location::find($request->route('location'));
+        if ($location->items()->exists()) {
+            return response(['items' => ['Unable to delete, location has items']], 422);
+        }
         $location->delete();
     }
 }

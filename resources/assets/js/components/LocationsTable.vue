@@ -66,7 +66,16 @@ export default {
         deleteLocation(id) {
             return axios.post('/api/locations/' + id, {_method: 'DELETE'})
                 .then(this.getLocations)
-                .catch(console.error);
+                .catch((error) => {
+                    let errors = [];
+                    for (const key in error.response.data) {
+                        if (error.response.data.hasOwnProperty(key)) {
+                            const e = error.response.data[key];
+                            errors.push(e[0]);
+                        }
+                    }
+                    alert(errors.join("\n"))
+                });
         }
     }
 }
