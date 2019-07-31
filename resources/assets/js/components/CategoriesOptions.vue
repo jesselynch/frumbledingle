@@ -2,6 +2,7 @@
     <div style="display: inline-block;">
         <select v-model="categoryId" 
             v-on:input="$emit('input', parseInt($event.target.value))" class="form-control">
+            <option value=""></option>
             <option v-for="row in categories" :key="row.id" :value="row.id">{{ row.name }}</option>
         </select>
     </div>

@@ -52,7 +52,16 @@ export default {
             return axios.post('/api/locations', {name: this.newLocationName})
                 .then(this.getLocations)
                 .then(() => this.newLocationName = '')
-                .catch(console.error);
+                .catch((error) => {
+                    let errors = [];
+                    for (const key in error.response.data) {
+                        if (error.response.data.hasOwnProperty(key)) {
+                            const e = error.response.data[key];
+                            errors.push(e[0]);
+                        }
+                    }
+                    alert(errors.join("\n"))
+                });
         },
         deleteLocation(id) {
             return axios.post('/api/locations/' + id, {_method: 'DELETE'})

@@ -89,11 +89,18 @@ export default {
                 .then(this.getItems)
                 .then(() => {
                     this.newItemName = '';
-                    this.newItemCategoryId = null;
-                    this.newItemLocationId = null;
                     this.newItemPrice = 0.00;
                 })
-                .catch(console.error);
+                .catch((error) => {
+                    let errors = [];
+                    for (const key in error.response.data) {
+                        if (error.response.data.hasOwnProperty(key)) {
+                            const e = error.response.data[key];
+                            errors.push(e[0]);
+                        }
+                    }
+                    alert(errors.join("\n"))
+                });
         },
         deleteItem(id) {
             return axios.post('/api/items/' + id, {_method: 'DELETE'})
