@@ -13,7 +13,7 @@ import axios from 'axios';
 
 export default {
     props: {
-        providedCategories: null
+        providedCategories: null,
     },
     data() {
         return {
@@ -37,6 +37,9 @@ export default {
         },
         setCategories(categories) {
             this.categories = categories;
+        },
+        reset() {
+            this.categoryId = null;
         }
     }
 }

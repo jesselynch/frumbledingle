@@ -10,12 +10,13 @@
                     <span class="input-group-text">Location</span>
                 </div>
                 <select v-model="newItemLocationId" class="form-control">
+                    <option value=""></option>
                     <option v-for="row in locations" :key="row.id" :value="row.id">{{ row.name }}</option>
                 </select>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Category</span>
                 </div>
-                <categories-options v-model="newItemCategoryId"></categories-options>
+                <categories-options ref="cats" v-model="newItemCategoryId"></categories-options>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Price</span>
                 </div>
@@ -90,6 +91,9 @@ export default {
                 .then(() => {
                     this.newItemName = '';
                     this.newItemPrice = 0.00;
+                    this.newItemLocationId = null;
+                    this.newItemCategoryId = null;
+                    this.$refs.cats.reset();
                 })
                 .catch((error) => {
                     let errors = [];

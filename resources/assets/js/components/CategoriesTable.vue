@@ -62,6 +62,7 @@ export default {
                 .then(() => {
                     this.newCategoryName = '';
                     this.newParentId = null;
+                    this.$refs.cats.reset();
                 })
                 .catch((error) => {
                     let errors = [];
